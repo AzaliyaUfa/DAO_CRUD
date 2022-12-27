@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.example</groupId>
+    <artifactId>DBproject</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.4.0</version>
+    </parent>
+
+    <properties>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+        <lombok.version>1.18.16</lombok.version>
+        <swagger.version>2.9.2</swagger.version>
+        <redis.version>2.7.2</redis.version>
+        <cassandra.version>2.7.5</cassandra.version>
+        <neo4j.version>2.7.4</neo4j.version>
+        <!--<mongodb.version>2.7.5</mongodb.version>-->
+    </properties>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>${swagger.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>${swagger.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+            <version>${lombok.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+            <version>${redis.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-cassandra</artifactId>
+            <version>${cassandra.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-neo4j</artifactId>
+            <version>${neo4j.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-mongodb</artifactId>
+            <version>2.7.5</version>
+            <!--<version>${mongodb.version}</version>-->
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+    <profiles>
+        <profile>
+            <id>postgres</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <spring-profiles-active>postgres</spring-profiles-active>
+                <postgres-db-enabled>true</postgres-db-enabled>
+            </properties>
+        </profile>
+        <profile>
+            <id>redis</id>
+            <properties>
+                <spring-profiles-active>redis</spring-profiles-active>
+                <redis-db-enabled>true</redis-db-enabled>
+            </properties>
+        </profile>
+        <profile>
+            <id>cassandra</id>
+            <properties>
+                <spring-profiles-active>cassandra</spring-profiles-active>
+                <cassandra-db-enabled>true</cassandra-db-enabled>
+            </properties>
+        </profile>
+        <profile>
+            <id>neo4j</id>
+            <properties>
+                <spring-profiles-active>neo4j</spring-profiles-active>
+                <neo4j-db-enabled>true</neo4j-db-enabled>
+            </properties>
+        </profile>
+        <profile>
+            <id>mongo</id>
+            <properties>
+                <spring-profiles-active>mongo</spring-profiles-active>
+                <mongo-db-enabled>true</mongo-db-enabled>
+            </properties>
+        </profile>
+        <profile>
+            <id>redirect</id>
+            <properties>
+                <spring-profiles-active>redirect</spring-profiles-active>
+                <postgres-db-enabled>true</postgres-db-enabled>
+                <redis-db-enabled>true</redis-db-enabled>
+                <cassandra-db-enabled>true</cassandra-db-enabled>
+                <neo4j-db-enabled>true</neo4j-db-enabled>
+                <mongo-db-enabled>true</mongo-db-enabled>
+            </properties>
+        </profile>
+    </profiles>
+
+</project>
